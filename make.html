@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Make a download link</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1>Make a Download link</h1>
+        <div id="form" onchange="make()">
+            <input type="text" id="name" placeholder="name"><input type="text" id="type" placeholder="type (like text/html)">
+            <br><textarea id="content" placeholder="File content here"></textarea>
+        </div>
+        <br><br>
+        <textarea id="output" placeholder="output URL add-on"></textarea>
+        <button onclick="make()">Create URL</button><button onclick="make('download')">Download</button>
+        <script>
+            function make(text) {
+                let n = base64encode(document.getElementById('name').value)
+                let t = base64encode(document.getElementById('type').value)
+                let c = base64encode(document.getElementById('content').value)
+                let o = '?n=' + n + '&t=' + t + '&c=' + c
+                document.getElementById('output').value=o
+                if (text == 'download') {
+                    location.replace('index.html' + o)
+                }
+            }
+
+            function base64encode(str) {
+                let encode = encodeURIComponent(str).replace(/%([a-f0-9]{2})/gi, (m, $1) => String.fromCharCode(parseInt($1, 16)))
+                return btoa(encode)
+            }
+            function base64decode(str) {
+                let decode = atob(str).replace(/[\x80-\uffff]/g, (m) => `%${m.charCodeAt(0).toString(16).padStart(2, '0')}`)
+                return decodeURIComponent(decode)
+            }
+        </script>
+    </body>
+</html>

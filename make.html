@@ -11,14 +11,14 @@
             <br><textarea id="content" placeholder="File content here"></textarea>
         </div>
         <br><br>
-        <textarea id="output" placeholder="output URL add-on"></textarea>
+        <textarea id="output" placeholder="output URL"></textarea>
         <button onclick="make()">Create URL</button><button onclick="make('download')">Download</button>
         <script>
             function make(text) {
                 let n = base64encode(document.getElementById('name').value)
                 let t = base64encode(document.getElementById('type').value)
                 let c = base64encode(document.getElementById('content').value)
-                let o = '?n=' + n + '&t=' + t + '&c=' + c
+                let o = 'iannl.github.io/download?n=' + n + '&t=' + t + '&c=' + c
                 document.getElementById('output').value=o
                 if (text == 'download') {
                     location.replace('index.html' + o)
